@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Ephesis&family=Roboto:wght@500&display=swap");
+
+body {
+  background-color: #151522;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+svg {
+  width: 90%;
+  height: 90%;
+  visibility: visible;
+  z-index: 1;
+}
+
+.text {
+  padding: 15px;
+  font-family: "Ephesis", sans-serif;
+  font-size: clamp(36px, 8vw, 82px);
+  color: #fffefe;
+  position: fixed;
+  top: 5%;
+  text-align: center;
+  opacity: 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.text.show {
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.particle,
+.snowflake {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mask settings */
+.treePathMask,
+.treeBottomMask,
+.treeTrunkMask {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 18px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.treeStar {
+  transform-origin: 50% 15%;
+  transform: scale(0);
+}
+
+/* --- STYLE CHO HỘP QUÀ --- */
+#gift-container {
+  position: absolute;
+  bottom: 10%;
+  left: 60%;
+  z-index: 20;
+  width: 80px;
+  height: auto;
+  cursor: pointer;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) rotate(-3deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+  75% {
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+}
+
+#gift-img {
+  width: 100%;
+  height: auto;
+
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+}
+
+#gift-container.closed {
+  animation: wiggle 0.6s ease-in-out infinite;
+}
+
+/* --- STYLE CHO POPUP MESSAGE --- */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  max-width: 400px;
+  width: 80%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: scale(0.5);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid #d42426;
+}
+
+.popup-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.popup-overlay.active .popup-content {
+  transform: scale(1);
+}
+
+.popup-text {
+  font-family: "Ephesis", sans-serif;
+  font-size: 45px;
+  color: #d42426;
+  margin: 20px 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #d42426;
+}
