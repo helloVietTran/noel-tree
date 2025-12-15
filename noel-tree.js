@@ -29,7 +29,15 @@ giftContainer.addEventListener("click", () => {
     if (!isGiftOpened) {
         giftImg.src = openGiftURL;
         isGiftOpened = true;
+
         giftContainer.classList.remove("closed");
+
+        // reset animation
+        giftContainer.style.animation = "none";
+        void giftContainer.offsetWidth; // force reflow
+        giftContainer.style.animation = "";
+
+        giftContainer.classList.add("opened");
 
         setTimeout(() => {
             popupOverlay.classList.add("active");
@@ -164,10 +172,13 @@ const bottomLen = setupDraw(bottomMask);
 const trunkLen = setupDraw(trunkMask);
 
 let startTime = null;
- // Thời gian vẽ gốc cây, tán lá dưới cùng, và thân cây
+// Thời gian vẽ gốc cây, tán lá dưới cùng, và thân cây
 const DURATION_TREE = 5000;
 const DURATION_BOTTOM = 1000;
 const DURATION_TRUNK = 1500;
+
+const SHOW_GIFT_TIME =
+    DURATION_TREE + DURATION_BOTTOM + DURATION_TRUNK + 500;
 
 function initSnow() {
     for (let i = 0; i < 150; i++) snowflakes.push(new Snowflake());
@@ -238,6 +249,11 @@ function animate(timestamp) {
 
     // Hiện chữ Merry Christmas
     if (elapsed > DURATION_TREE + 1500) textElement.classList.add("show");
+
+    // Hiện hộp quà
+    if (elapsed > SHOW_GIFT_TIME) {
+        giftContainer.classList.add("show");
+    }
 
     // hiệu ứng tuyết và hạt
     for (let i = particles.length - 1; i >= 0; i--) {

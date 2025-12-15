@@ -80,24 +80,18 @@ svg {
   width: 80px;
   height: auto;
   cursor: pointer;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: scale(0.5);
 }
 
-@keyframes wiggle {
-  0% {
-    transform: translateX(-50%) rotate(0deg);
-  }
-  25% {
-    transform: translateX(-50%) rotate(-3deg);
-  }
-  50% {
-    transform: translateX(-50%) rotate(3deg);
-  }
-  75% {
-    transform: translateX(-50%) rotate(-2deg);
-  }
-  100% {
-    transform: translateX(-50%) rotate(0deg);
-  }
+
+#gift-container.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
 }
 
 #gift-img {
@@ -109,6 +103,28 @@ svg {
 
 #gift-container.closed {
   animation: wiggle 0.6s ease-in-out infinite;
+}
+
+#gift-container.opened {
+  animation: wiggle 0.6s ease-in-out 2;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 /* --- STYLE CHO POPUP MESSAGE --- */
